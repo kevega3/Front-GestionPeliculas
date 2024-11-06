@@ -6,6 +6,7 @@ import Carrito from "../Carrito/carrito";
 import Destacadas from "../Pelicula/destacadas";
 import Buscar from "../Pelicula/buscar";
 import Registro from "../Registro/registro";
+import Login from "../Login/login";
 
 const Body = () => {
   return (
@@ -19,6 +20,7 @@ const Body = () => {
         <Route path="/buscar/:valor" element={<Buscar />} />
         <Route path="/buscar/" element={<Peliculas />}></Route>
         <Route path="/registro/" element={<Registro />}></Route>
+        <Route path="/login/" element={<Login />}></Route>
       </Routes>
     </section>
   );

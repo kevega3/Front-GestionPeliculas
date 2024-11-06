@@ -1,8 +1,10 @@
 import { Container, TextField, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Registrar } from "../Services/usuariosServices";
+import { useNavigate } from "react-router-dom";
 import Icon from "@mui/material/Icon";
 function Registro() {
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState({
     Nombre: "",
     Apellido: "",
@@ -69,11 +71,15 @@ function Registro() {
         <br />
         <br />
         <hr />
-        <Button variant="contained" color="defauld">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/login/")}
+        >
           Volver
         </Button>
         &nbsp; &nbsp;
-        <Button variant="contained" color="defauld" type="submit">
+        <Button variant="contained" color="secondary" type="submit">
           Registrate
         </Button>
       </form>

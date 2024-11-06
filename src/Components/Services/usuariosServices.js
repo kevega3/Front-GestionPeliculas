@@ -4,6 +4,6 @@ export function Registrar(usuario) {
   return axios.post("Usuario/", usuario);
 }
 
-export function Login(usuario) {
+export function login(usuario) {
   return axios.post("Login/", usuario);
 }
