@@ -12,7 +12,7 @@ const Body = () => {
   return (
     <section>
       <Routes>
-        <Route path="/" element={<Peliculas />} />
+        <Route path="/" element={<Login />} />
         <Route path="/peliculas" element={<Peliculas />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/carrito" element={<Carrito />} />

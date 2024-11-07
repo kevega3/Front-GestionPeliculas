@@ -4,31 +4,40 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 import Rating from "@mui/material/Rating";
+import { FavoritoContext } from "../Context/favoritoContext";
+import { CarritoContext } from "../Context/carritoContext";
 
 const Pelicula = (props) => {
+  const { handerFavoritosAgregar, handerEliminarFavoritos } =
+    React.useContext(FavoritoContext);
+  const { handleAgregarCarrito, handleComprar } =
+    React.useContext(CarritoContext);
   const [botones, setBotones] = useState("");
   const favorito = useRef();
 
-  const setFavorito = () => {
-    favorito.current.style.backgroundColor = "green";
+  const setFavorito = (pelicula) => {
+    if (pelicula.favorito.length === 0) {
+      handerFavoritosAgregar(pelicula);
+
+      favorito.current.style.color = "red";
+    } else {
+      handerEliminarFavoritos(pelicula);
+
+      favorito.current.style.color = "grey";
+    }
   };
+
   return (
     <>
       <Grid container item xs={12} sm={4} lg={3}>
         <Paper style={{ padding: 5, textAlign: "center" }}>
-          {/* <div>
-            <button
-              ref={favorito}
-              style={{ backgroundColor: "yellow" }}
-              onClick={() => {
-                setFavorito();
-              }}
-            >
-              Favorito
-            </button>
-          </div> */}
           <h2>{props.datos.titulo}</h2>
-          <Icon color={"disabled"} style={{ cursor: "pointer" }}>
+          <Icon
+            ref={favorito}
+            color={props.datos.favorito.length > 0 ? "error" : "disabled"}
+            style={{ cursor: "pointer" }}
+            onClick={() => setFavorito(props.datos)}
+          >
             favorite
           </Icon>
           <div>
@@ -55,9 +64,10 @@ const Pelicula = (props) => {
               color="primary"
               disabled={botones}
               onClick={() => {
-                setBotones("disabled");
+                handleComprar([props.datos]);
+                setBotones(true);
                 alert("¡Has comprado esta película!");
-              }} //poner primero sin corchetes, mostrar el error y explicar que se pasa como array
+              }}
             >
               Comprar
             </Button>
@@ -67,7 +77,8 @@ const Pelicula = (props) => {
               color="secondary"
               disabled={botones}
               onClick={() => {
-                setBotones("disabled");
+                handleAgregarCarrito(props.datos);
+                setBotones(true);
               }}
             >
               Agregar al Carrito
